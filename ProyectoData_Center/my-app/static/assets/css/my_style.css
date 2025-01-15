@@ -92,7 +92,7 @@ body {
 }
 
 .bx-menu {
-  background-color: #08b324 !important;
+  background-color: #59d8fb !important;
   color: #fff;
   padding: 10px 10px;
   border-radius: 50%;
@@ -111,7 +111,7 @@ body {
 }
 
 tbody tr {
-  border-bottom: 1px solid #eee !important;
+  border-bottom: 1px solid #f51919 !important;
 }
 
 tbody tr:hover {
@@ -149,21 +149,21 @@ tbody tr:hover {
 
 .pesos {
   background-color: #08b324;
-  color: #fff;
+  color: #ea16c6;
   padding: 2px;
   border-radius: 10%;
   margin-right: 10px;
 }
 
 .colorTheadTrTh {
-  color: #fff !important;
+  color: #5384ee !important;
 }
 
 .input_vacio {
-  border-color: #dc3545 !important;
+  border-color: hsl(237, 91%, 50%) !important;
 }
 .input_lleno {
-  border-color: #198754 !important;
+  border-color: #047186 !important;
 }
 
 .menu-vertical .menu-inner > .menu-item .menu-link {
@@ -192,7 +192,7 @@ tbody tr:hover {
 }
 
 .alert-success {
-  background-color: #48c808 !important;
+  background-color: #27408d !important;
   color: #fff !important;
 }
 
@@ -200,7 +200,7 @@ tbody tr:hover {
   text-transform: uppercase !important;
 }
 .btn-primary {
-  background-color: #09c046 !important;
+  background-color: #6c9dc9 !important;
   border: none !important;
 }
 .btn-close {
@@ -208,7 +208,7 @@ tbody tr:hover {
   height: auto !important;
 }
 .bi-x {
-  color: #222 !important;
+  color: #0e79f3 !important;
 }
 
 .form-check-input {
@@ -232,7 +232,7 @@ tbody tr:hover {
 
 #search {
   min-width: 44% !important;
-  background-color: #f3efef !important;
+  background-color: #5d07e7 !important;
 }
 
 .acceso {
