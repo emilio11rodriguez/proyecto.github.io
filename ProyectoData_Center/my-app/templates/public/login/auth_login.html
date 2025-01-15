@@ -3,16 +3,6 @@
     <div class="authentication-inner">
       <div class="card">
         <div class="card-body">
-          <div class="app-brand justify-content-center">
-            <span class="app-brand-logo">
-              <img
-                class="logo"
-                style="display: flex"
-                src="{{ url_for('static', filename ='./assets/img/logo.png') }}"
-                alt="Logo" />
-            </span>
-          </div>
-
           <form
             id="formAuthentication"
             class="mb-3"
@@ -31,7 +21,6 @@
             <div class="mb-3 form-password-toggle">
               <div class="d-flex justify-content-between">
                 <label class="form-label" for="password">Clave</label>
-        
               </div>
               <div class="input-group input-group-merge">
                 <input
@@ -54,10 +43,40 @@
               </button>
             </div>
           </form>
-
-        
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  body {
+    background: url('{{ url_for('static', filename='./assets/img/logo.png') }}') no-repeat center center fixed;
+    background-size: 65%; /* Ajusta al 100% del ancho de la pantalla */
+    font-family: Arial, sans-serif;
+  }
+
+  .card {
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .container-xxl {
+    min-height: 100vh; /* Ocupa toda la pantalla */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .input-group-text {
+    cursor: pointer;
+  }
+</style>
