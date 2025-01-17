@@ -321,3 +321,16 @@ def sensor_temperatura():
     except Exception as e:
         print(f"Error al obtener datos de sensores de temperatura: {e}")
         return []
+#Eliminar registro sensor humo
+def eliminarSensorHumo(id_sensor):
+    try:
+        with connectionBD() as conexion_MySQLdb:
+            with conexion_MySQLdb.cursor(dictionary=True) as cursor:
+                querySQL = "DELETE FROM sensor_humo_m WHERE id_sensor=%s"
+                cursor.execute(querySQL, (id_sensor,))
+                conexion_MySQLdb.commit()
+                resultado_eliminar = cursor.rowcount
+        return resultado_eliminar
+    except Exception as e:
+        print(f"Error en eliminarSensorHumo: {e}")
+        return []

@@ -155,7 +155,7 @@ def cerraSesion():
             return render_template(f'{PATH_URL_LOGIN}/base_login.html')
 
 @app.route('/tarjeta-rfid', methods=['GET'])
-def tarjeta():
+def tarjet():
     if 'conectado' in session:
         try:
             # Obtiene los datos de los sensores de temperatura desde la base de datos
@@ -171,7 +171,7 @@ def tarjeta():
         return redirect(url_for('inicio'))
     
 @app.route('/sensor-humo', methods=['GET'])
-def sensor_humo():
+def sensor_hum():
     if 'conectado' in session:
         try:
             # Obtiene los datos de los sensores de temperatura desde la base de datos

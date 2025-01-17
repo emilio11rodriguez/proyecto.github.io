@@ -101,7 +101,7 @@ def updateArea():
 
 #Datos sensor tempertura
 @app.route('/sensor-temperatura', methods=['GET'])
-def sensor_temperatura():
+def sensor_temp():
     if 'conectado' in session:
         try:
             # Obtiene los datos de los sensores de temperatura desde la base de datos
