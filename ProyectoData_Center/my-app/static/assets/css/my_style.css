@@ -227,7 +227,7 @@ tbody tr:hover {
 
 #informe_general:hover {
   cursor: pointer;
-  border-bottom: dotted 1px #08b324;
+  border-bottom: dotted 1px #9469eb;
 }
 
 #search {

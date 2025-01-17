@@ -28,6 +28,14 @@
       </a>
     </li>
     <li
+      class="menu-item {% if request.path == '/s' %} active{% endif %}"
+    >
+      <a href="/s" class="menu-link">
+        <i class="menu-icon bi bi-person-badge-fill"></i>
+        <div data-i18n="Boxicons">SENSOR RFID</div>
+      </a>
+    </li>
+    <li
       class="menu-item {% if request.path == '/reporte-accesos' %} active{%endif%}"
     >
       <a href="/reporte-accesos" class="menu-link">
