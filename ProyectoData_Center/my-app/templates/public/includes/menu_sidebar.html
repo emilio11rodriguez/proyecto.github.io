@@ -27,14 +27,24 @@
         <div data-i18n="Tables">Generar Clave</div>
       </a>
     </li>
-    <li
-      class="menu-item {% if request.path == '/s' %} active{% endif %}"
-    >
-      <a href="/s" class="menu-link">
-        <i class="menu-icon bi bi-person-badge-fill"></i>
-        <div data-i18n="Boxicons">SENSOR RFID</div>
+    {% if dataLogin.rol == 1 %}
+    <li class="menu-item {% if request.path == '/tarjeta-rfid' %} active {% endif %}">
+      <a href="/sensor-humo" class="menu-link">
+        <i class="bi bi-fire"></i>
+        <span class="menu-text" style="margin-left: 12px;"></span>
+        <div data-i18n="Etiqueta">Sensor de humo </div>
       </a>
     </li>
+
+    <li class="menu-item {% if request.path == '/tarjeta-rfid' %} active {% endif %}">
+      <a href="/tarjeta-rfid" class="menu-link">
+        <i class="bi bi-credit-card"></i>
+        <span class="menu-text" style="margin-left: 12px;">
+          <div data-i18n="Etiqueta">Tarjeta</div>
+        </span>
+      </a>
+    </li>
+  {% endif %}
     <li
       class="menu-item {% if request.path == '/reporte-accesos' %} active{%endif%}"
     >
