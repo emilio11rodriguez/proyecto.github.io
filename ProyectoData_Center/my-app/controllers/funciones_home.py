@@ -270,4 +270,54 @@ def actualizarArea(area_id, area_name):
         
     except Exception as e:
         return f'Se produjo un error al actualizar el área: {str(e)}'
+
+def sensor_temperatura():
+    try:
+        with connectionBD() as conexion_MySQLdb:
+            with conexion_MySQLdb.cursor(dictionary=True) as cursor:
+                # Modifica la consulta según la estructura de tu base de datos
+                querySQL = "SELECT id, fecha, nivel_temperatura FROM sensor_temperatura"
+                cursor.execute(querySQL)
+                datos_sensor_temperatura = cursor.fetchall()
+        return datos_sensor_temperatura
+    except Exception as e:
+        print(f"Error al obtener datos de sensores de temperatura: {e}")
+        return []
     
+def tarjeta():
+    try:
+        with connectionBD() as conexion_MySQLdb:
+            with conexion_MySQLdb.cursor(dictionary=True) as cursor:
+                # Modifica la consulta según la estructura de tu base de datos
+                querySQL = "SELECT id, fecha, id_tarjeta FROM tarjeta"
+                cursor.execute(querySQL)
+                datos_tarjeta = cursor.fetchall()
+        return datos_tarjeta
+    except Exception as e:
+        print(f"Error al obtener registros de la tarjeta: {e}")
+        return[]
+    
+def sensor_humo():
+    try:
+        with connectionBD() as conexion_MySQLdb:
+            with conexion_MySQLdb.cursor(dictionary=True) as cursor:
+                # Modifica la consulta según la estructura de tu base de datos
+                querySQL = "SELECT id, fecha, nivel_humo FROM sensor_humo"
+                cursor.execute(querySQL)
+                datos_sensor_humo = cursor.fetchall()
+        return datos_sensor_humo
+    except Exception as e:
+        print(f"Error al obtener registros de la tarjeta: {e}")
+        return[]
+def sensor_temperatura():
+    try:
+        with connectionBD() as conexion_MySQLdb:
+            with conexion_MySQLdb.cursor(dictionary=True) as cursor:
+                # Modifica la consulta según la estructura de tu base de datos
+                querySQL = "SELECT id, fecha, nivel_temperatura FROM sensor_temperatura "
+                cursor.execute(querySQL)
+                datos_sensor_temperatura = cursor.fetchall()
+        return datos_sensor_temperatura
+    except Exception as e:
+        print(f"Error al obtener datos de sensores de temperatura: {e}")
+        return []
