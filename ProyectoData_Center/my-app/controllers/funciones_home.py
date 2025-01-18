@@ -301,7 +301,7 @@ def tarjeta_bd_frid():
         with connectionBD() as conexion_MySQLdb:
             with conexion_MySQLdb.cursor(dictionary=True) as cursor:
                 # Consulta SQL para obtener los datos de la tarjeta RFID
-                querySQL = "SELECT id_usuario, nombre, tarjeta, fecha_hora FROM tarjeta_rfid"
+                querySQL = "SELECT id_usuario,fecha_hora,tarjeta FROM tarjeta_rfid"
                 cursor.execute(querySQL)
                 # Obtiene los resultados de la consulta
                 datos_tarjeta = cursor.fetchall()
