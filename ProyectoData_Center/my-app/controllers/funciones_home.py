@@ -284,16 +284,19 @@ def sensor_temperatura():
         print(f"Error al obtener datos de sensores de temperatura: {e}")
         return []
     
-def tarjetabd():
+def tarjeta_bd_frid():
     try:
-        with connectionBD() as conexion_MySQLdb:  # Asegúrate de que esta función está correctamente configurada
+        # Establecemos la conexión a la base de datos
+        with connectionBD() as conexion_MySQLdb:
             with conexion_MySQLdb.cursor(dictionary=True) as cursor:
-                # Consulta SQL ajustada
-                querySQL = "SELECT id_usuario, nombre,  tarjeta, fecha_hora FROM tarjeta_rfid"
+                # Consulta SQL para obtener los datos de la tarjeta RFID
+                querySQL = "SELECT id_usuario, nombre, tarjeta, fecha_hora FROM tarjeta_rfid"
                 cursor.execute(querySQL)
-                datos_tarjeta = cursor.fetchall()  # Obtiene los resultados
-        return datos_tarjeta
+                # Obtiene los resultados de la consulta
+                datos_tarjeta = cursor.fetchall()
+        return datos_tarjeta  # Retorna los datos obtenidos
     except Exception as e:
+        # En caso de error, lo imprime en el log y retorna una lista vacía
         print(f"Error al obtener registros de la tarjeta RFID: {e}")
         return []  # Retorna una lista vacía en caso de error
 
@@ -308,20 +311,8 @@ def sensor_humo():
                 datos_sensor_humo = cursor.fetchall()
         return datos_sensor_humo
     except Exception as e:
-        print(f"Error al obtener registros de la tarjeta: {e}")
+        print(f"Error al obtener registros de los sensores de humo: {e}")
         return[]
-def sensor_temperatura():
-    try:
-        with connectionBD() as conexion_MySQLdb:
-            with conexion_MySQLdb.cursor(dictionary=True) as cursor:
-                # Modifica la consulta según la estructura de tu base de datos
-                querySQL = "SELECT id, fecha, nivel_temperatura FROM sensor_temperatura "
-                cursor.execute(querySQL)
-                datos_sensor_temperatura = cursor.fetchall()
-        return datos_sensor_temperatura
-    except Exception as e:
-        print(f"Error al obtener datos de sensores de temperatura: {e}")
-        return []
 
 #Eliminar registro sensor humo
 def eliminarSensorHumo(id_sensor):

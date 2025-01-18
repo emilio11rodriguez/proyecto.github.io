@@ -22,28 +22,37 @@
         <table class="table table-hover">
           <thead>
             <tr style="background-color: #ddd">
-              <th>ID_Usuario</th>
-              <th>Nombre</th>
-              <th>UID Tarjeta</th>
-              <th>Fecha-hora acceso</th>
-              <!-- La columna de Acciones se ha eliminado -->
+              <th scope="col">ID_Usuario</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">UID Tarjeta</th>
+              <th scope="col">Fecha-hora acceso</th>
             </tr>
           </thead>
           <tbody>
-            {% for tarjeta_rfid in datos_tarjeta %}
+            {% if datos_tarjeta %}
+              {% for tarjeta_rfid in datos_tarjeta %}
+                <tr>
+                  <td>{{ tarjeta_rfid.id_usuario }}</td>
+                  <td>{{ tarjeta_rfid.nombre }}</td>
+                  <td>{{ tarjeta_rfid.tarjeta }}</td>
+                  <td class="fecha-hora">
+                    {% if tarjeta_rfid.fecha_hora %}
+                      {{ tarjeta_rfid.fecha_hora.strftime('%Y-%m-%d %H:%M:%S') }}
+                    {% else %}
+                      No disponible
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            {% else %}
               <tr>
-                <td>{{ tarjeta_rfid.id_usuario}}</td>
-                <td>{{ tarjeta_rfid.nombre}} </td>
-                <td>{{ tarjeta_rfid.tarjeta }}</td>
-                <td class="fecha-hora">{{ tarjeta_rfid.fecha_hora}}</td>
-                <!-- La columna de Acciones se ha eliminado -->
+                <td colspan="4" class="text-center">No hay datos disponibles.</td>
               </tr>
-            {% endfor %}
+            {% endif %}
           </tbody>
         </table>
       </div>
-    </section>
-  </div>
+      
 
   <!-- Script Custom -->
   {% block customJS %}

@@ -131,12 +131,21 @@ def eliminar_sensor_humo_route(id_sensor):
     return redirect(url_for('inicio'))
 
 
-
-
 @app.route('/tarjeta-rfid', methods=['GET'])
 def tarjeta_rfid():
+    # Verificamos si el usuario está conectado en la sesión
     if 'conectado' in session:
-            return render_template('public/usuarios/tarjeta.html', datos_tarjeta=tarjetabd, dataLogin=dataLoginSesion())
+        try:
+            # Llamamos a la función que obtiene los datos de la base de datos
+            datos_tarjeta = tarjeta_bd_frid()
+
+            # Renderiza la plantilla y pasa los datos necesarios
+            return render_template('public/usuarios/tarjeta.html', datos_tarjeta=datos_tarjeta, dataLogin=dataLoginSesion())
+        except Exception as e:
+            # Si ocurre un error, mostramos un mensaje y redirigimos
+            flash(f"Error al obtener datos de tarjeta RFID: {e}", 'error')
+            return redirect(url_for('inicio'))  # Redirige al inicio si hay error
     else:
+        # Si no está conectado, mostramos un mensaje de error y redirigimos
         flash('Primero debes iniciar sesión.', 'error')
-        return redirect(url_for('inicio'))
+        return redirect(url_for('inicio'))  # Redirige al inicio si no está conectado
