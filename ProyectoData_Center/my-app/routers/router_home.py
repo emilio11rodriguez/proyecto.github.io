@@ -115,21 +115,62 @@ def sensor_temp():
     else:
         flash('Primero debes iniciar sesión.', 'error')
         return redirect(url_for('inicio'))
+
+# Eliminar registro sensor temperatura
+@app.route('/eliminar-sensor-temperatura/<int:id_sensor>', methods=['GET', 'POST'])
+def eliminar_sensor_temperatura_route(id_sensor):
+    if 'conectado' in session:
+        try:
+            # Llama a la función para eliminar el registro del sensor de temperatura
+            eliminarSensorTemperatura(id_sensor)  # Asegúrate de definir esta función
+
+            flash('Registro del sensor de temperatura eliminado con éxito.', 'success')
+        except Exception as e:
+            flash(f"Error al eliminar el registro del sensor de temperatura: {e}", 'error')
+
+        # Redirige a la página de los datos del sensor de temperatura después de la eliminación
+        return redirect(url_for('sensor_temp'))  # O a donde desees redirigir
+    else:
+        flash('Primero debes iniciar sesión.', 'error')
+        return redirect(url_for('inicio'))
+
+
+@app.route('/sensor-humo', methods=['GET'])
+def sensor_humo():
+    if 'conectado' in session:
+        try:
+            # Obtiene los datos de los sensores de humo desde la base de datos
+            datos_sensor_humo = obtener_datos_sensor_humo()  # Solo una llamada aquí
+
+            # Renderiza la plantilla con los datos obtenidos
+            return render_template('public/usuarios/sensorhumo.html', 
+                                   datos_sensor_humo=datos_sensor_humo,  # Se pasan los datos correctos
+                                   dataLogin=dataLoginSesion())  # Asegúrate de que esta función esté definida correctamente
+        except Exception as e:
+            flash(f"Error al obtener datos de sensor de humo: {e}", 'error')
+            return redirect(url_for('inicio'))
+    else:
+        flash('Primero debes iniciar sesión.', 'error')
+        return redirect(url_for('inicio'))
+
     
-    
-#Eliminar registro sensor humo
+# Eliminar registro sensor de humo
 @app.route('/eliminar-sensor-humo/<int:id_sensor>', methods=['GET', 'POST'])
 def eliminar_sensor_humo_route(id_sensor):
-    try:
-        # Llama a la función para eliminar el registro del sensor de humo
-        eliminarSensorHumo(id_sensor)
-        flash('Registro del sensor de humo eliminado con éxito.', 'success')
-    except Exception as e:
-        flash(f"Error al eliminar el registro del sensor de humo: {e}", 'error')
+    if 'conectado' in session:
+        try:
+            # Llama a la función para eliminar el registro del sensor de humo
+            eliminarSensorHumo(id_sensor)
 
-    # Redirige a la página principal o a donde desees después de la eliminación
-    return redirect(url_for('inicio'))
+            flash('Registro del sensor de humo eliminado con éxito.', 'success')
+        except Exception as e:
+            flash(f"Error al eliminar el registro del sensor de humo: {e}", 'error')
 
+        # Redirige a la página de los datos del sensor de humo después de la eliminación
+        return redirect(url_for('sensor_humo'))  # O a donde desees redirigir
+    else:
+        flash('Primero debes iniciar sesión.', 'error')
+        return redirect(url_for('inicio'))
 
 @app.route('/tarjeta-rfid', methods=['GET'])
 def tarjeta_rfid():

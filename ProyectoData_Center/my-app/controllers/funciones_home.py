@@ -284,6 +284,17 @@ def sensor_temperatura():
         print(f"Error al obtener datos de sensores de temperatura: {e}")
         return []
     
+def eliminarSensorTemperatura(id_sensor):
+    try:
+        with connectionBD() as conexion_MySQLdb:
+            with conexion_MySQLdb.cursor() as cursor:
+                querySQL = "DELETE FROM sensor_temperatura WHERE id = %s"
+                cursor.execute(querySQL, (id_sensor,))
+                conexion_MySQLdb.commit()  # Asegúrate de hacer commit para guardar cambios
+    except Exception as e:
+        print(f"Error al eliminar el sensor de temperatura: {e}")
+        raise  # Vuelve a lanzar la excepción para ser capturada en la vista
+
 def tarjeta_bd_frid():
     try:
         # Establecemos la conexión a la base de datos
@@ -301,29 +312,38 @@ def tarjeta_bd_frid():
         return []  # Retorna una lista vacía en caso de error
 
     
-def sensor_humo():
+def obtener_datos_sensor_humo():
     try:
+        # Establece la conexión con la base de datos
         with connectionBD() as conexion_MySQLdb:
             with conexion_MySQLdb.cursor(dictionary=True) as cursor:
-                # Modifica la consulta según la estructura de tu base de datos
+                # Consulta para obtener los datos del sensor de humo
                 querySQL = "SELECT id, fecha, nivel_humo FROM sensor_humo"
                 cursor.execute(querySQL)
+                # Obtiene todos los resultados de la consulta
                 datos_sensor_humo = cursor.fetchall()
+        
+        # Si no se obtiene ningún dato, se podría devolver una lista vacía (por seguridad)
+        if not datos_sensor_humo:
+            print("No se encontraron registros para el sensor de humo.")
+        
+        # Retorna los datos obtenidos
         return datos_sensor_humo
     except Exception as e:
+        # Maneja cualquier excepción que ocurra y muestra un mensaje de error
         print(f"Error al obtener registros de los sensores de humo: {e}")
-        return[]
+        # Devuelve una lista vacía en caso de error
+        return []
+
 
 #Eliminar registro sensor humo
 def eliminarSensorHumo(id_sensor):
     try:
         with connectionBD() as conexion_MySQLdb:
-            with conexion_MySQLdb.cursor(dictionary=True) as cursor:
-                querySQL = "DELETE FROM sensor_humo_m WHERE id_sensor=%s"
+            with conexion_MySQLdb.cursor() as cursor:
+                querySQL = "DELETE FROM sensor_humo WHERE id = %s"
                 cursor.execute(querySQL, (id_sensor,))
-                conexion_MySQLdb.commit()
-                resultado_eliminar = cursor.rowcount
-        return resultado_eliminar
+                conexion_MySQLdb.commit()  # Asegúrate de hacer commit para guardar cambios
     except Exception as e:
-        print(f"Error en eliminarSensorHumo: {e}")
-        return []
+        print(f"Error al eliminar el sensor de humo: {e}")
+        raise  # Vuelve a lanzar la excepción para ser capturada en la vista
