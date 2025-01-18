@@ -116,6 +116,7 @@ def sensor_temp():
         flash('Primero debes iniciar sesión.', 'error')
         return redirect(url_for('inicio'))
     
+    
 #Eliminar registro sensor humo
 @app.route('/eliminar-sensor-humo/<int:id_sensor>', methods=['GET', 'POST'])
 def eliminar_sensor_humo_route(id_sensor):
@@ -128,3 +129,14 @@ def eliminar_sensor_humo_route(id_sensor):
 
     # Redirige a la página principal o a donde desees después de la eliminación
     return redirect(url_for('inicio'))
+
+
+
+
+@app.route('/tarjeta-rfid', methods=['GET'])
+def tarjeta_rfid():
+    if 'conectado' in session:
+            return render_template('public/usuarios/tarjeta.html', datos_tarjeta=tarjetabd, dataLogin=dataLoginSesion())
+    else:
+        flash('Primero debes iniciar sesión.', 'error')
+        return redirect(url_for('inicio'))

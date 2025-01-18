@@ -23,9 +23,9 @@
           <tbody>
             {% for sensor_humo_m in datos_sensor_humo %}
               <tr>
-                <td>{{ sensor_humo_m.id_sensor }}</td>
-                <td>{{ sensor_humo_m.fecha_alerta }}</td>
-                <td>{{ sensor_humo_m.valor }}</td>
+                <td>{{ sensor_humo_m.id}}</td>
+                <td>{{ sensor_humo_m.fecha}}</td>
+                <td>{{ sensor_humo_m.nivel_humo}}</td>
                 <td>
                   <!-- Botón de eliminar -->
                   <a class="btn btn-danger btn-sm"
