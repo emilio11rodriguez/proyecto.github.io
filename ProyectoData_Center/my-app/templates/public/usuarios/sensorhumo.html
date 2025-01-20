@@ -16,6 +16,7 @@
           <tr style="background-color: #8e8e8e">
             <th>ID</th>
             <th>Fecha</th>
+            <th>Valor</th>
             <th>Nivel de humo</th>
             <th>Acciones</th>
           </tr>
@@ -25,6 +26,7 @@
             <tr>
               <td>{{ sensor_humo_m.id }}</td>
               <td>{{ sensor_humo_m.fecha }}</td>
+              <td>{{ sensor_humo_m.valor}}</td>
               <td>{{ sensor_humo_m.nivel_humo }}</td>
               <td>
                 <!-- Botón para eliminar el sensor, redirige a la ruta de eliminación -->
@@ -37,7 +39,7 @@
             </tr>
           {% else %}
             <tr>
-              <td colspan="4">No se encontraron registros de sensores de humo.</td>
+              <td colspan="4" class="text-center">No se encontraron registros de sensores de humo.</td>
             </tr>
           {% endfor %}
         </tbody>

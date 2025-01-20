@@ -190,3 +190,43 @@ def tarjeta_rfid():
         # Si no está conectado, mostramos un mensaje de error y redirigimos
         flash('Primero debes iniciar sesión.', 'error')
         return redirect(url_for('inicio'))  # Redirige al inicio si no está conectado
+    
+#Intento de funcionabilidad de scanerar
+@app.route('/tarjeta-rfid/ultimo', methods=['GET'])
+def obtener_ultimo_rfid():
+    try:
+        # Establecemos la conexión a la base de datos
+        with connectionBD() as conexion_MySQLdb:
+            with conexion_MySQLdb.cursor(dictionary=True) as cursor:
+                # Consulta para obtener el último registro de la tarjeta RFID
+                querySQL = "SELECT tarjeta FROM tarjeta_rfid ORDER BY fecha_hora DESC LIMIT 1"
+                cursor.execute(querySQL)
+                ultimo_registro = cursor.fetchone()  # Obtiene el último registro
+
+        # Devuelve el registro en formato JSON
+        return jsonify(ultimo_registro if ultimo_registro else {'tarjeta': None})
+    except Exception as e:
+        print(f"Error al obtener el último registro de tarjeta RFID: {e}")
+        return jsonify({'error': 'Error al obtener el registro de la tarjeta RFID'}), 500
+
+
+## intento sensor de movimiento
+@app.route('/sensor-movimiento', methods=['GET'])
+def sensor_movimiento():
+    if 'conectado' in session:
+        try:
+            # Obtiene los datos de la tabla sensor_movimiento
+            datos_movimiento = obtener_datos_sensor_movimiento()
+
+            # Renderiza la plantilla y pasa los datos correctamente
+            return render_template(
+                'public/usuarios/sensormovimiento.html',
+                datos_movimiento=datos_movimiento,
+                dataLogin=dataLoginSesion()
+            )
+        except Exception as e:
+            flash(f"Error al obtener datos de sensores de movimiento: {e}", 'error')
+            return redirect(url_for('inicio'))
+    else:
+        flash('Primero debes iniciar sesión.', 'error')
+        return redirect(url_for('inicio'))

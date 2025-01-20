@@ -276,7 +276,7 @@ def sensor_temperatura():
         with connectionBD() as conexion_MySQLdb:
             with conexion_MySQLdb.cursor(dictionary=True) as cursor:
                 # Modifica la consulta según la estructura de tu base de datos
-                querySQL = "SELECT id, fecha, nivel_temperatura FROM sensor_temperatura"
+                querySQL = "SELECT id, fecha, valor , nivel_temperatura FROM sensor_temperatura"
                 cursor.execute(querySQL)
                 datos_sensor_temperatura = cursor.fetchall()
         return datos_sensor_temperatura
@@ -301,7 +301,7 @@ def tarjeta_bd_frid():
         with connectionBD() as conexion_MySQLdb:
             with conexion_MySQLdb.cursor(dictionary=True) as cursor:
                 # Consulta SQL para obtener los datos de la tarjeta RFID
-                querySQL = "SELECT id_usuario,fecha_hora,tarjeta FROM tarjeta_rfid"
+                querySQL = "SELECT id_usuario,fecha_hora,tarjeta,autorizada FROM tarjeta_rfid"
                 cursor.execute(querySQL)
                 # Obtiene los resultados de la consulta
                 datos_tarjeta = cursor.fetchall()
@@ -318,7 +318,7 @@ def obtener_datos_sensor_humo():
         with connectionBD() as conexion_MySQLdb:
             with conexion_MySQLdb.cursor(dictionary=True) as cursor:
                 # Consulta para obtener los datos del sensor de humo
-                querySQL = "SELECT id, fecha, nivel_humo FROM sensor_humo"
+                querySQL = "SELECT id, fecha, valor , nivel_humo FROM sensor_humo"
                 cursor.execute(querySQL)
                 # Obtiene todos los resultados de la consulta
                 datos_sensor_humo = cursor.fetchall()
@@ -347,3 +347,22 @@ def eliminarSensorHumo(id_sensor):
     except Exception as e:
         print(f"Error al eliminar el sensor de humo: {e}")
         raise  # Vuelve a lanzar la excepción para ser capturada en la vista
+
+
+# Prueba de funcionabilidad del sensor movimiento
+def obtener_datos_sensor_movimiento():
+    try:
+        with connectionBD() as conexion_MySQLdb:
+            with conexion_MySQLdb.cursor(dictionary=True) as cursor:
+                # Consulta SQL para obtener los datos de la tabla sensor_movimiento
+                querySQL = """
+                SELECT id, fecha, estado, sensor
+                FROM sensor_movimiento
+                """
+                cursor.execute(querySQL)
+                datos_sensor_movimiento = cursor.fetchall()  # Obtiene todos los registros
+        return datos_sensor_movimiento  # Retorna los datos obtenidos
+    except Exception as e:
+        print(f"Error al obtener datos de sensores de movimiento: {e}")
+        return []  # Retorna una lista vacía en caso de error
+

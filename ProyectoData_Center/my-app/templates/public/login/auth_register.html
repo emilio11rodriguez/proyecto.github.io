@@ -54,7 +54,6 @@
                   required
                   autofocus />
               </div>
-
             </div>
             
             <div class="row">
@@ -92,6 +91,31 @@
                   <i class="bx bx-hide"></i>
                 </span>
               </div>
+              <div class="row align-items-center">
+                <div class="mb-3 col-md-6">
+                  <label for="tarjeta_id" class="form-label">
+                    Tarjeta ID
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="tarjeta_id"
+                    name="tarjeta_id"
+                    required
+                    autofocus />
+                </div>
+                <div class="mb-3 col-md-6">
+                  <label for="estado" class="form-label">
+                  </label>
+                  <button
+                    type="button"
+                    class="btn btn-primary w-100 d-flex align-items-center justify-content-center"
+                    id="scanButton">
+                    Scanear
+                    <i class="bi bi-arrow-right-circle ms-2"></i>
+                  </button>
+                </div>
+              </div>                          
             </div>
             <button class="btn btn-primary w-100">
               Crear cuenta
@@ -112,5 +136,32 @@
     </div>
   </div>
 </div>
+
+  {% block customJS %}
+  <script>
+    // Lógica para el botón Scanear
+    document.getElementById('scanButton').addEventListener('click', async () => {
+      try {
+        // Realiza la solicitud al servidor
+        const response = await fetch('/tarjeta-rfid/ultimo', {
+          method: 'GET',
+        });
+  
+        // Verifica si la respuesta es exitosa
+        if (response.ok) {
+          const data = await response.json();
+  
+          // Actualiza el campo tarjeta_id con el valor obtenido
+          document.getElementById('tarjeta_id').value = data.tarjeta || 'No disponible';
+        } else {
+          alert('No se pudo obtener la tarjeta RFID. Intenta de nuevo.');
+        }
+      } catch (error) {
+        console.error('Error al obtener la tarjeta:', error);
+        alert('Error al conectar con el servidor.');
+      }
+    });
+  </script>
+  {% endblock %}
 
 {% endblock %}

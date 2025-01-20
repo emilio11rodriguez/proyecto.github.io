@@ -54,6 +54,14 @@
         </span>
       </a>
     </li>
+
+    <li class="menu-item {% if request.path == '/sensor-movimiento' %} active {% endif %}">
+      <a href="/sensor-movimiento" class="menu-link">
+        <i class="bi bi-thermometer"></i>
+        <span class="menu-text" style="margin-left: 12px;">Sensor de Movimiento</span>
+      </a>
+    </li>    
+
     {% endif %}
 
     <li
