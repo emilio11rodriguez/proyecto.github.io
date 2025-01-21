@@ -238,3 +238,30 @@ tbody tr:hover {
 .acceso {
   line-height: 18px;
 }
+
+/* Estilo para efecto hover en botones */
+.btn-effect {
+  position: relative;
+  overflow: hidden;
+  transition: color 0.5s ease;
+}
+
+.btn-effect::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #578ef4; /* Color de fondo del efecto */
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.btn-effect:hover::before {
+  width: 100%;
+}
+
+.btn-effect:hover {
+  color: inherit; /* Mantiene el color del texto original */
+}
