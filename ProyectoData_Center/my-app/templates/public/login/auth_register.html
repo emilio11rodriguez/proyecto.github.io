@@ -86,12 +86,15 @@
                   id="pass_user"
                   placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                   aria-describedby="password"
-                  required pattern="(?=.\d)(?=.[a-z])(?=.*[A-Z]).{8,}"
-                  title="La contraseña debe contar al menos 8 caracteres."/>
+                  required 
+                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
+                  title="La contraseña debe contar al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula y un número."/>
                 <span class="input-group-text cursor-pointer">
                   <i class="bx bx-hide"></i>
                 </span>
               </div>
+            </div>
+            
               <div class="row align-items-center">
                 <div class="mb-3 col-md-6">
                   <label for="tarjeta_id" class="form-label">
