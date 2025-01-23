@@ -10,8 +10,8 @@
     {% include 'public/includes/head.html' %}
     <!---->
     {% block customCSS %} {% endblock %}
-  </head>
-  <body>
+</head>
+<body>
     {% include 'public/includes/pre_loader.html' %}
     <!---->
     {% include 'public/includes/navbar.html' %}
@@ -29,6 +29,38 @@
               <div>
                 <h1>BIENVENIDO ADMINISTRADOR</h1>
               </div>
+
+<!-- Carrusel debajo del mensaje de bienvenida -->
+<div class="conteudo__geral">
+  <div class="container">
+    <div class="container-carrossel">
+      <div id="carouselExampleIndicators" class="carousel slide carrossel" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active carrossel-item" style="background-image: url('/static/assets/img/imagen1.png');"></div>
+          <div class="carousel-item carrossel-item" style="background-image: url('/static/assets/img/imagen2.png');"></div>
+          <div class="carousel-item carrossel-item" style="background-image: url('/static/assets/img/imagen3.png');"></div>
+          <div class="carousel-item carrossel-item" style="background-image: url('/static/assets/img/imagen4.png');"></div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin del carrusel -->
+
               {% endif %}
               {% if dataLogin.rol == 2 %}
               <div>
@@ -50,5 +82,5 @@
     {% include 'public/includes/js.html' %}
     <!--Custom JS-->
     {% block customJS %} {% endblock %}
-  </body>
+</body>
 </html>

@@ -265,3 +265,53 @@ tbody tr:hover {
 .btn-effect:hover {
   color: inherit; /* Mantiene el color del texto original */
 }
+
+/* Estilo general para la estructura del carrusel */
+.conteudo__geral {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5; /* Fondo general */
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px; /* Limita el ancho máximo */
+  margin: 0 auto;
+}
+
+.container-carrossel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px; /* Esquinas redondeadas para el contenedor del carrusel */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+/* Estilo del carrusel */
+.carrossel {
+  display: flex;
+  transition: transform 0.5s ease; /* Animación suave */
+  gap: 10px; /* Espaciado entre los elementos */
+}
+
+/* Cada item del carrusel */
+.carrossel-item {
+  min-width: 100%; /* Cada imagen ocupa todo el ancho del carrusel */
+  height: 400px; /* Ajusta la altura del carrusel */
+  background-size: cover; /* Asegura que la imagen cubra todo el espacio */
+  background-position: center; /* Centra la imagen */
+}
+
+/* Ajustes responsivos para dispositivos más pequeños */
+@media (max-width: 768px) {
+  .carrossel-item {
+    height: 300px; /* Reduce la altura en pantallas pequeñas */
+  }
+}
+
+@media (min-width: 1200px) {
+  .carrossel-item {
+    height: 500px; /* Incrementa la altura en pantallas grandes */
+  }
+}
