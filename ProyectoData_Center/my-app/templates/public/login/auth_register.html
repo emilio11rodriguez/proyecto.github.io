@@ -86,7 +86,8 @@
                   id="pass_user"
                   placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                   aria-describedby="password"
-                  required />
+                  required pattern="(?=.\d)(?=.[a-z])(?=.*[A-Z]).{8,}"
+                  title="La contraseña debe contar al menos 8 caracteres."/>
                 <span class="input-group-text cursor-pointer">
                   <i class="bx bx-hide"></i>
                 </span>
