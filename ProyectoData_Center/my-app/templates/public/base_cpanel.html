@@ -31,6 +31,7 @@
               </div>
 
 <!-- Carrusel debajo del mensaje de bienvenida -->
+ 
 <div class="conteudo__geral">
   <div class="container">
     <div class="container-carrossel">
@@ -59,6 +60,25 @@
     </div>
   </div>
 </div>
+
+<style>
+  .container-carrossel {
+    width: 150%; /* Asegura que ocupe todo el ancho */
+    max-width: 1200px; /* Ajusta el tamaño máximo del carrusel */
+    margin: 0 auto; /* Centra el carrusel horizontalmente */
+  }
+
+  .carousel-inner {
+    height: 1000px; /* Ajusta la altura del carrusel */
+  }
+
+  .carousel-item {
+    background-size: cover; /* Las imágenes cubren el espacio del carrusel */
+    background-position: center; /* Centra las imágenes */
+    height: 100%; /* Las imágenes ocupan toda la altura del carrusel */
+  }
+</style>
+
 <!-- Fin del carrusel -->
 
               {% endif %}
