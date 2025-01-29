@@ -1,11 +1,11 @@
-<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" style="width: 250px;">
   <div class="app-brand demo">
     <a href="{{ url_for('inicio') }}" class="app-brand-link">
       <span class="app-brand-logo demo">
         <img
           src="{{ url_for('static', filename ='assets/img/logo.png') }}"
           alt="Logo"
-        />
+          style="max-width: 1500px; max-height: 1500px;"  <!-- Ajuste del logo -->
       </span>
     </a>
 
@@ -19,91 +19,145 @@
 
   <div class="menu-inner-shadow"></div>
   <ul class="menu-inner py-5">
-    <li
-      class="menu-item {% if request.path == '/interfaz-clave' %} active {% endif %}"
-    >
+    <li class="menu-item {% if request.path == '/interfaz-clave' %} active {% endif %}">
       <a href="/interfaz-clave" class="menu-link btn-effect">
         <i class="menu-icon bi bi-person-fill-lock"></i>
-        <div data-i18n="Tables">Generar Clave</div>
+        <div class="menu-text" style="font-size: 1.1rem;">Generar Clave</div>  <!-- Aumento del tamaño de texto -->
       </a>
     </li>
+
     {% if dataLogin.rol in [1, 2] %}
-    <li class="menu-item {% if request.path == '/sensor-temperatura' %} active {% endif %}">
-      <a href="/sensor-temperatura" class="menu-link btn-effect">
-        <i class="bi bi-thermometer"></i>
-        <div data-i18n="Etiqueta" style="margin-left: 12px;">Sensor de temperatura</div>
+    <li class="menu-item">
+      <a href="javascript:void(0);" class="menu-link btn-effect" data-bs-toggle="collapse" data-bs-target="#sensores-slide" aria-expanded="false" aria-controls="sensores-slide">
+        <i class="menu-icon bi bi-gear-wide-connected"></i>  
+        <div class="menu-text" style="font-size: 1.1rem;">Sensores y Tarjeta RFID</div>  <!-- Aumento del tamaño de texto -->
       </a>
     </li>
+
+    <!-- Contenedor de los elementos del slide -->
+    <ul id="sensores-slide" class="collapse menu-dropdown list-unstyled ms-3">
+      <li class="menu-item {% if request.path == '/sensor-temperatura' %} active {% endif %}">
+        <a href="/sensor-temperatura" class="menu-link btn-effect">
+          <i class="bi bi-thermometer menu-icon"></i>  
+          <div class="menu-text" style="font-size: 1.1rem;">Sensor de temperatura</div>  <!-- Aumento del tamaño de texto -->
+        </a>
+      </li>
+
+      {% if dataLogin.rol == 1 %}
+      <li class="menu-item {% if request.path == '/sensor-humo' %} active {% endif %}">
+        <a href="/sensor-humo" class="menu-link btn-effect">
+          <i class="bi bi-fire menu-icon"></i>  
+          <div class="menu-text" style="font-size: 1.1rem;">Sensor de humo</div>  <!-- Aumento del tamaño de texto -->
+        </a>
+      </li>
+
+      <li class="menu-item {% if request.path == '/tarjeta-rfid' %} active {% endif %}">
+        <a href="/tarjeta-rfid" class="menu-link btn-effect">
+          <i class="bi bi-credit-card menu-icon"></i>  
+          <div class="menu-text" style="font-size: 1.1rem;">Tarjeta RFID</div>  <!-- Aumento del tamaño de texto -->
+        </a>
+      </li>
+
+      <li class="menu-item {% if request.path == '/sensor-movimiento' %} active {% endif %}">
+        <a href="/sensor-movimiento" class="menu-link btn-effect">
+          <i class="bi bi-thermometer menu-icon"></i>  
+          <div class="menu-text" style="font-size: 1.1rem;">Sensor de Movimiento</div>  <!-- Aumento del tamaño de texto -->
+        </a>
+      </li>
+      {% endif %}
+    </ul>
     {% endif %}
-    
 
-    {% if dataLogin.rol == 1 %}
-    <li class="menu-item {% if request.path == '/sensor-humo' %} active {% endif %}">
-      <a href="/sensor-humo" class="menu-link btn-effect">
-        <i class="bi bi-fire"></i>
-        <span class="menu-text" style="margin-left: 12px;"></span>
-        <div data-i18n="Etiqueta">Sensor de humo </div>
-      </a>
-    </li>
-
-    <li class="menu-item {% if request.path == '/tarjeta-rfid' %} active {% endif %}">
-      <a href="/tarjeta-rfid" class="menu-link btn-effect">
-        <i class="bi bi-credit-card"></i>
-        <span class="menu-text" style="margin-left: 12px;">
-          <div data-i18n="Etiqueta">Tarjeta RFID</div>
-        </span>
-      </a>
-    </li>
-
-    <li class="menu-item {% if request.path == '/sensor-movimiento' %} active {% endif %}">
-      <a href="/sensor-movimiento" class="menu-link btn-effect">
-        <i class="bi bi-thermometer"></i>
-        <span class="menu-text" style="margin-left: 12px;">Sensor de Movimiento</span>
-      </a>
-    </li>    
-
-    {% endif %}
-
-    <li
-      class="menu-item {% if request.path == '/reporte-accesos' %} active{%endif%}"
-    >
+    <li class="menu-item {% if request.path == '/reporte-accesos' %} active{%endif%}">
       <a href="/reporte-accesos" class="menu-link btn-effect">
-        <i class="menu-icon bi bi-file-lock-fill"></i>
-        <div data-i18n="Tables">Reporte Accesos</div>
+        <i class="menu-icon bi bi-file-lock-fill"></i>  
+        <div class="menu-text" style="font-size: 1.1rem;">Reporte Accesos</div>  <!-- Aumento del tamaño de texto -->
       </a>
     </li>
+
     {% if dataLogin.rol == 1 %}
-    <li
-      class="menu-item {% if request.path == '/lista-de-areas' %} active{% endif %}"
-    >
+    <li class="menu-item {% if request.path == '/lista-de-areas' %} active{% endif %}">
       <a href="/lista-de-areas" class="menu-link btn-effect">
-        <i class="menu-icon bi bi-person-lines-fill"></i>
-        <div data-i18n="Boxicons">Lista de Áreas</div>
+        <i class="menu-icon bi bi-person-lines-fill"></i>  
+        <div class="menu-text" style="font-size: 1.1rem;">Lista de Áreas</div>  <!-- Aumento del tamaño de texto -->
       </a>
     </li>
-    {%endif%} {% if dataLogin.rol == 1 %}
-    <li
-      class="menu-item {% if request.path == '/lista-de-usuarios' %} active {% endif %}"
-    >
+    {% endif %}
+
+    {% if dataLogin.rol == 1 %}
+    <li class="menu-item {% if request.path == '/lista-de-usuarios' %} active {% endif %}">
       <a href="/lista-de-usuarios" class="menu-link btn-effect">
-        <i class="menu-icon bi bi-person-lines-fill"></i>
-        <div data-i18n="Tables">Lista de Usuarios</div>
+        <i class="menu-icon bi bi-person-lines-fill"></i>  
+        <div class="menu-text" style="font-size: 1.1rem;">Lista de Usuarios</div>  <!-- Aumento del tamaño de texto -->
       </a>
     </li>
-    {%endif%}
-    <li
-      class="menu-item {% if request.path == '/mi-perfil/{{dataLogin.id}}'%} active {% endif %}"
-    >
+    {% endif %}
+
+    <li class="menu-item {% if request.path == '/mi-perfil/{{dataLogin.id}}'%} active {% endif %}">
       <a href="/mi-perfil/{{dataLogin.id}}" class="menu-link btn-effect">
-        <i class="menu-icon bi bi-person-fill-gear"></i>
-        <div data-i18n="Tables">Mi Perfil</div>
+        <i class="menu-icon bi bi-person-fill-gear"></i>  
+        <div class="menu-text" style="font-size: 1.1rem;">Mi Perfil</div>  <!-- Aumento del tamaño de texto -->
       </a>
     </li>
+
     <li class="menu-item">
       <a href="{{ url_for('cerraSesion') }}" class="menu-link btn-effect">
-        <i class="menu-icon tf-icons bx bi-box-arrow-right"></i>
-        <div data-i18n="Tables">Salir</div>
+        <i class="menu-icon tf-icons bx bi-box-arrow-right"></i>  
+        <div class="menu-text" style="font-size: 1.1rem;">Salir</div>  <!-- Aumento del tamaño de texto -->
       </a>
     </li>
   </ul>
 </aside>
+
+<style>
+  /* Estilos para el menú */
+  .layout-menu {
+    width: 250px; /* Ancho del menú */
+    background-color: #f9f9f9; /* Fondo del menú */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Sombra para el menú */
+  }
+  
+  .menu-text {
+    font-size: 3 rem; /* Tamaño de texto */
+    font-family: 'Open Sans', sans-serif; /* Fuente */
+  }
+  
+  .menu-item {
+    transition: background-color 0.3s ease-in-out;
+    padding: 15px; /* Espaciado entre elementos */
+  }
+  
+  .menu-item:hover {
+    background-color:rgb(175, 243, 242); /* Fondo suave al pasar el cursor */
+  }
+  .layout-menu {
+    width: 400px; /* Ajusta el ancho del menú */
+    background-color: #f9f9f9; /* Fondo del menú */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Sombra para el menú */
+  }
+  
+  
+  .menu-link {
+    color: #007bff; /* Color de texto */
+    text-decoration: none; /* Sin subrayado */
+  }
+  
+  .menu-link:hover {
+    color: #004080; /* Azul más oscuro al pasar el cursor */
+  }
+  
+  .active .menu-link {
+    color: #004080 !important; /* Azul oscuro para la opción activa */
+  }
+  
+  /* Iconos */
+  .menu-icon {
+    margin-right: 15px; /* Espacio entre icono y texto */
+  }
+  @media (max-width: 768px) {
+    .layout-menu {
+      width: 100%; /* Ancho del menú en dispositivos móviles */
+    }
+  }
+    
+</style>

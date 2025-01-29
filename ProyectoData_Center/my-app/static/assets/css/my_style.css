@@ -315,3 +315,24 @@ tbody tr:hover {
     height: 500px; /* Incrementa la altura en pantallas grandes */
   }
 }
+
+
+/* Transición de deslizamiento para el slide */
+.menu-dropdown {
+  transition: all 0.3s ease;
+}
+
+.menu-item a:hover {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+}
+
+.menu-item a.active {
+  background-color: #5e72e4;
+  color: white;
+}
+
+.menu-text {
+  font-weight: 500;
+  font-size: 14px;
+}
