@@ -19,7 +19,6 @@
                     <th>Temperatura</th>
                     <th>Estado</th>
                     <!-- Comentario para referencia: <th>Humedad</th> -->
-                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,10 +28,6 @@
                         <td>{{ sensor.fecha }}</td>
                         <td>{{ sensor.valor }} °C</td>
                         <td>{{ sensor.nivel_temperatura }}</td>
-                        <td>
-                            <!-- Botón para eliminar el sensor, redirige a la ruta de eliminación -->
-                            <a href="{{ url_for('eliminar_sensor_temperatura_route', id_sensor=sensor.id) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este sensor de temperatura?')">Eliminar</a>
-                        </td>
                     </tr>
                 {% else %}
                   <tr>

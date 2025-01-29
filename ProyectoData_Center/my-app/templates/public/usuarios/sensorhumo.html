@@ -18,7 +18,6 @@
             <th>Fecha</th>
             <th>Valor</th>
             <th>Nivel de humo</th>
-            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -29,12 +28,6 @@
               <td>{{ sensor_humo_m.valor}}</td>
               <td>{{ sensor_humo_m.nivel_humo }}</td>
               <td>
-                <!-- Botón para eliminar el sensor, redirige a la ruta de eliminación -->
-                <a href="{{ url_for('eliminar_sensor_humo_route', id_sensor=sensor_humo_m.id) }}" 
-                   class="btn btn-danger"
-                   onclick="return confirm('¿Estás seguro de eliminar este sensor de humo?')">
-                  Eliminar
-                </a>
               </td>
             </tr>
           {% else %}
