@@ -54,7 +54,7 @@
       <li class="menu-item {% if request.path == '/tarjeta-rfid' %} active {% endif %}">
         <a href="/tarjeta-rfid" class="menu-link btn-effect">
           <i class="bi bi-credit-card menu-icon"></i>  
-          <div class="menu-text" style="font-size: 1.1rem;">Tarjeta RFID</div>  <!-- Aumento del tamaño de texto -->
+          <div class="menu-text" style="font-size: 1.1rem;">ACCESOS RFID</div>  <!-- Aumento del tamaño de texto -->
         </a>
       </li>
 
@@ -68,12 +68,7 @@
     </ul>
     {% endif %}
 
-    <li class="menu-item {% if request.path == '/reporte-accesos' %} active{%endif%}">
-      <a href="/reporte-accesos" class="menu-link btn-effect">
-        <i class="menu-icon bi bi-file-lock-fill"></i>  
-        <div class="menu-text" style="font-size: 1.1rem;">Reporte Accesos</div>  <!-- Aumento del tamaño de texto -->
-      </a>
-    </li>
+
 
     {% if dataLogin.rol == 1 %}
     <li class="menu-item {% if request.path == '/lista-de-areas' %} active{% endif %}">
