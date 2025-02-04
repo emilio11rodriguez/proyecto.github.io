@@ -75,6 +75,29 @@
               </div>
             </div>
 
+            <div class="row">
+              <!-- Fecha de Creación (Automática) -->
+              <div class="mb-3 col-md-6">
+                <label for="fecha_creacion" class="form-label">Fecha de Creación</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fecha_creacion"
+                  name="fecha_creacion"
+                  readonly />
+              </div>
+            
+              <!-- Fecha de Expiración (Seleccionable) -->
+              <div class="mb-3 col-md-6">
+                <label for="fecha_expiracion" class="form-label">Fecha de Expiración</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="fecha_expiracion"
+                  name="fecha_expiracion"
+                  required />
+              </div>
+            </div>
             
             <div class="mb-3 form-password-toggle mt-3">
               <label class="form-label" for="pass_user">Clave</label>
@@ -164,6 +187,17 @@
         console.error('Error al obtener la tarjeta:', error);
         alert('Error al conectar con el servidor.');
       }
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Obtener la fecha actual en formato YYYY-MM-DD
+      let today = new Date().toISOString().split("T")[0];
+      document.getElementById("fecha_creacion").value = today;
+
+      // Configurar la fecha mínima de expiración (que no sea menor a hoy)
+      document.getElementById("fecha_expiracion").setAttribute("min", today);
     });
   </script>
   {% endblock %}

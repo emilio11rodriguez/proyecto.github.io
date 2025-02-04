@@ -11,7 +11,7 @@ import re
 from werkzeug.security import generate_password_hash
 
 
-def recibeInsertRegisterUser(cedula, name, surname, id_area, id_rol, tarjeta_id, pass_user):
+def recibeInsertRegisterUser(cedula, name, surname, id_area, id_rol, fecha_creacion, fecha_expiracion, tarjeta_id, pass_user):
     respuestaValidar = validarDataRegisterLogin(
         cedula, name, surname, tarjeta_id, pass_user)
 
@@ -21,8 +21,8 @@ def recibeInsertRegisterUser(cedula, name, surname, id_area, id_rol, tarjeta_id,
             with connectionBD() as conexion_MySQLdb:
                 with conexion_MySQLdb.cursor(dictionary=True) as mycursor:
                     sql = """
-                    INSERT INTO usuarios(cedula, nombre_usuario, apellido_usuario, id_area, id_rol, tarjeta_id, password) 
-                    VALUES (%s, %s, %s, %s, %s, %s, %s)
+                    INSERT INTO usuarios(cedula, nombre_usuario, apellido_usuario, id_area, id_rol, fecha_creacion, fecha_expiracion, tarjeta_id, password) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s,  %s, %s)
                     """
                     valores = (cedula, name, surname, id_area, id_rol, tarjeta_id, nueva_password)
                     mycursor.execute(sql, valores)
