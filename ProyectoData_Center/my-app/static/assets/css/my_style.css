@@ -39,7 +39,7 @@ body {
 }
 
 #loading-text {
-  color: #222;
+  color: #76dbf5;
   font-size: 1.5em;
   position: absolute;
   top: 50%;
@@ -106,7 +106,7 @@ body {
 }
 
 .noLeido {
-  color: #272e37;
+  color: #d8cf46;
   font-weight: 600;
 }
 
@@ -200,7 +200,7 @@ tbody tr:hover {
   text-transform: uppercase !important;
 }
 .btn-primary {
-  background-color: #6c9dc9 !important;
+  background-color: #17c4ea !important;
   border: none !important;
 }
 .btn-close {
@@ -253,7 +253,7 @@ tbody tr:hover {
   top: 0;
   width: 0;
   height: 100%;
-  background-color: #578ef4; /* Color de fondo del efecto */
+  background-color: #051c84; /* Color de fondo del efecto */
   z-index: -1;
   transition: all 0.3s ease;
 }

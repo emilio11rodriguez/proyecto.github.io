@@ -81,6 +81,7 @@ def procesar_update_perfil(data_form,id):
     apellido_usuario = data_form['surname']
     id_area = data_form['selectArea']
     id_rol= data_form['selectRol']
+    fecha_expiracion= data_form['fecha_expiracion']
     
     new_pass_user = data_form['new_pass_user']
     
@@ -98,10 +99,11 @@ def procesar_update_perfil(data_form,id):
                             apellido_usuario = %s,
                             id_area = %s,
                             id_rol = %s,
+                            fecha_expiracion = %s,
                             password = %s
                         WHERE id_usuario = %s
                     """
-                    params = (nombre_usuario,apellido_usuario, id_area, id_rol,
+                    params = (nombre_usuario,apellido_usuario, id_area, id_rol, fecha_expiracion,
                                 nueva_password, id_user)
                     cursor.execute(querySQL, params)
                     conexion_MySQLdb.commit()

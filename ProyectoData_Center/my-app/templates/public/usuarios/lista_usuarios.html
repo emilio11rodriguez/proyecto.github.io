@@ -25,6 +25,8 @@
             <th>Nombre</th>
             <th>Área</th>
             <th>Rol</th>
+            <th>Fecha de creación</th>
+            <th>Fecha Expiración</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -47,6 +49,8 @@
               {%endif%}
               {%endfor%}
             </td>
+            <td>{{ usuario.fecha_creacion}}</td>
+            <td>{{ usuario.fecha_expiracion}}</td>
             <td>
               <a
                   href="/mi-perfil/{{usuario.id_usuario}}"
