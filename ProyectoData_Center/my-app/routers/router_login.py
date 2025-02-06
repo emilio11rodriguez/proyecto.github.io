@@ -102,7 +102,8 @@ def actualizarPerfil(id):
         return redirect(url_for('inicio'))
 
 
-# Validar sesión
+from datetime import datetime
+
 @app.route('/login', methods=['GET', 'POST'])
 def loginCliente():
     if 'conectado' in session:
@@ -113,32 +114,36 @@ def loginCliente():
             cedula = str(request.form['cedula'])
             pass_user = str(request.form['pass_user'])
             conexion_MySQLdb = connectionBD()
-            print(conexion_MySQLdb)
             cursor = conexion_MySQLdb.cursor(dictionary=True)
             cursor.execute(
                 "SELECT * FROM usuarios WHERE cedula = %s", [cedula])
             account = cursor.fetchone()
 
             if account:
+                fecha_expiracion = account.get('fecha_expiracion')
+                fecha_actual = datetime.today().date()
+
+                if fecha_expiracion and fecha_actual >= fecha_expiracion:
+                    flash('Tu cuenta ha expirado, contacta con el administrador.', 'error')
+                    return render_template(f'{PATH_URL_LOGIN}/base_login.html')
+
                 if check_password_hash(account['password'], pass_user):
-                    # Crear datos de sesión, para poder acceder a estos datos en otras rutas
                     session['conectado'] = True
                     session['id'] = account['id_usuario']
                     session['name'] = account['nombre_usuario']
                     session['cedula'] = account['cedula']
                     session['rol'] = account['id_rol']
 
-                    flash('la sesión fue correcta.', 'success')
+                    flash('La sesión fue correcta.', 'success')
                     return redirect(url_for('inicio'))
                 else:
-                    # La cuenta no existe o el nombre de usuario/contraseña es incorrecto
-                    flash('datos incorrectos por favor revise.', 'error')
+                    flash('Datos incorrectos, por favor revisa.', 'error')
                     return render_template(f'{PATH_URL_LOGIN}/base_login.html')
             else:
-                flash('el usuario no existe, por favor verifique.', 'error')
+                flash('El usuario no existe, por favor verifica.', 'error')
                 return render_template(f'{PATH_URL_LOGIN}/base_login.html')
         else:
-            flash('primero debes iniciar sesión.', 'error')
+            flash('Primero debes iniciar sesión.', 'error')
             return render_template(f'{PATH_URL_LOGIN}/base_login.html')
 
 
