@@ -1,6 +1,7 @@
 
 # Para subir archivo tipo foto al servidor
 from werkzeug.utils import secure_filename
+import mysql.connector
 import uuid  # Modulo de python para crear un string
 
 from conexion.conexionBD import connectionBD  # Conexión a BD
@@ -128,7 +129,7 @@ def lista_usuariosBD():
     try:
         with connectionBD() as conexion_MySQLdb:
             with conexion_MySQLdb.cursor(dictionary=True) as cursor:
-                querySQL = "SELECT id_usuario, cedula, nombre_usuario, apellido_usuario, id_area, id_rol, fecha_creacion, fecha_expiracion FROM usuarios"
+                querySQL = "SELECT id_usuario, cedula, nombre_usuario, apellido_usuario, id_area, id_rol, fecha_creacion, fecha_expiracion, id_empresa FROM usuarios"
                 cursor.execute(querySQL,)
                 usuariosBD = cursor.fetchall()
         return usuariosBD
@@ -363,21 +364,44 @@ def obtener_datos_sensor_humo():
 
 
 
-
-# Prueba de funcionabilidad del sensor movimiento
 def obtener_datos_sensor_movimiento():
     try:
-        with connectionBD() as conexion_MySQLdb:
-            with conexion_MySQLdb.cursor(dictionary=True) as cursor:
-                # Consulta SQL para obtener los datos de la tabla sensor_movimiento
-                querySQL = """
-                SELECT id, fecha, estado, sensor
-                FROM sensor_movimiento order by fecha desc
-                """
-                cursor.execute(querySQL)
-                datos_sensor_movimiento = cursor.fetchall()  # Obtiene todos los registros
+        # Conexión a la base de datos
+        conexion_MySQLdb = mysql.connection  
+        with conexion_MySQLdb.cursor(dictionary=True) as cursor:
+            # Consulta SQL para obtener los datos de la tabla sensor_movimiento
+            querySQL = """
+            SELECT id, fecha, estado, sensor
+            FROM sensor_movimiento ORDER BY fecha DESC
+            """
+            cursor.execute(querySQL)
+            datos_sensor_movimiento = cursor.fetchall()  # Obtiene todos los registros
         return datos_sensor_movimiento  # Retorna los datos obtenidos
     except Exception as e:
         print(f"Error al obtener datos de sensores de movimiento: {e}")
         return []  # Retorna una lista vacía en caso de error
+def guardarEmpresa(nombre, direccion, telefono, email=None):
+    try:
+        with connectionBD() as conexion_MySQLdb:
+            with conexion_MySQLdb.cursor(dictionary=True) as cursor:
+                querySQL = """INSERT INTO empresa 
+                            (nombre_empresa, direccion_empresa, telefono_empresa, email_empresa)
+                            VALUES (%s, %s, %s, %s)"""
+                cursor.execute(querySQL, (nombre, direccion, telefono, email))
+                conexion_MySQLdb.commit()
+                return cursor.lastrowid  # Retorna el ID de la nueva empresa insertada
+    except Exception as e:
+        print(f"Error en guardarEmpresa: {e}")
+        return False
 
+def eliminarEmpresa(id_empresa):
+    try:
+        with connectionBD() as conexion_MySQLdb:
+            with conexion_MySQLdb.cursor(dictionary=True) as cursor:
+                sql = "DELETE FROM empresa WHERE id_empresa = %s"
+                cursor.execute(sql, (id_empresa,))
+                conexion_MySQLdb.commit()
+                return cursor.rowcount > 0  # Retorna True si se eliminó algún registro
+    except Exception as e:
+        print(f"Error en eliminarEmpresa: {e}")
+        return False

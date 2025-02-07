@@ -5,20 +5,21 @@
 {% block body %}
 <div class="card content_consignaciones" style="border-radius: 0px !important">
   <section id="respuestaFiltroMes">
-    <h2 class="text-center mt-5 mb-5">
+    <h2 class="text-center mt-5 mb-4">
       Empresas Registradas 
-      <hr />
+      <hr class="w-50 mx-auto" />
     </h2>
 
     <div class="table-responsive text-nowrap">
-      <table class="table table-hover">
-        <thead>
-          <tr style="background-color: #8e8e8e">
+      <table class="table table-hover table-striped">
+        <thead class="thead-dark">
+          <tr>
             <th>ID</th>
             <th>Nombre</th>
             <th>Dirección</th>
             <th>Teléfono</th>
             <th>Email</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -29,15 +30,50 @@
               <td>{{ empresa.direccion_empresa or 'N/A' }}</td>
               <td>{{ empresa.telefono_empresa or 'N/A' }}</td>
               <td>{{ empresa.email_empresa or 'N/A' }}</td>
+              <td>
+                <a href="/borrar-empresa/{{ empresa.id_empresa }}" 
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Estás seguro de eliminar esta empresa?')">
+                    Eliminar
+                </a>
+              </td>
             </tr>
           {% else %}
             <tr>
-              <td colspan="5" class="text-center">No hay empresas registradas</td>
+              <td colspan="6" class="text-center">No hay empresas registradas</td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
   </section>
+</div>
+
+<!-- Formulario para agregar empresa -->
+<div class="card mb-4 mt-4">
+  <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">Agregar nueva empresa</h5>
+  </div>
+  <div class="card-body">
+      <form method="POST" action="/crear-empresa">
+          <div class="mb-3">
+              <label class="form-label">Nombre de la empresa</label>
+              <input type="text" name="nombre_empresa" class="form-control" required>
+          </div>
+          <div class="mb-3">
+              <label class="form-label">Dirección</label>
+              <input type="text" name="direccion_empresa" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Teléfono</label>
+            <input type="number" name="telefono_empresa" class="form-control" required>
+        </div>
+          <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" name="email_empresa" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-success">Guardar</button>
+      </form>
+  </div>
 </div>
 {% endblock %}

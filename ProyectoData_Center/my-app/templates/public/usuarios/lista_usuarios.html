@@ -27,6 +27,7 @@
             <th>Rol</th>
             <th>Fecha de creación</th>
             <th>Fecha Expiración</th>
+            <th>Empresa</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -51,6 +52,7 @@
             </td>
             <td>{{ usuario.fecha_creacion}}</td>
             <td>{{ usuario.fecha_expiracion}}</td>
+            <td>{{ usuario.id_empresa}}</td>
             <td>
               <a
                   href="/mi-perfil/{{usuario.id_usuario}}"

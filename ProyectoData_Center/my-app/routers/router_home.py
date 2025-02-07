@@ -2,6 +2,7 @@ from controllers.funciones_login import *
 from app import app
 from flask import render_template, request, flash, redirect, url_for, session,  jsonify
 from mysql.connector.errors import Error
+import mysql.connector
 
 
 # Importando cenexión a BD
@@ -237,4 +238,57 @@ def sensor_movimiento():
             return redirect(url_for('inicio'))
     else:
         flash('Primero debes iniciar sesión.', 'error')
+        return redirect(url_for('inicio'))
+
+# Ruta para borrar empresa
+@app.route('/borrar-empresa/<string:id_empresa>', methods=['GET'])
+def borrarEmpresa(id_empresa):
+    if 'conectado' in session:
+        try:
+            resp = eliminarEmpresa(id_empresa)
+            if resp:
+                flash('Empresa eliminada correctamente', 'success')
+            else:
+                flash('Error al eliminar la empresa', 'error')
+        except Exception as e:
+            flash(f'Error en base de datos: {str(e)}', 'error')
+        return redirect(url_for('empresa'))
+    else:
+        flash('Debes iniciar sesión primero', 'error')
+        return redirect(url_for('inicio'))
+
+# Ruta para crear empresa
+@app.route('/crear-empresa', methods=['POST'])
+def crear_empresa():
+    if 'conectado' in session:
+        if request.method == 'POST':
+            # Imprime los datos recibidos
+            print(request.form)
+            nombre_empresa = request.form.get('nombre_empresa', '').strip()
+            direccion_empresa = request.form.get('direccion_empresa', '').strip()
+            telefono_empresa = request.form.get('telefono_empresa', '').strip()
+            email_empresa = request.form.get('email_empresa', '').strip() or None
+
+            # Validar campos obligatorios
+            if not all([nombre_empresa, direccion_empresa, telefono_empresa]):
+                flash('Nombre, dirección y teléfono son campos obligatorios', 'error')
+                return redirect(url_for('empresa'))
+
+            # Validar formato del teléfono (solo números)
+            if not telefono_empresa.isdigit():
+                flash('El teléfono debe contener solo números', 'error')
+                return redirect(url_for('empresa'))
+
+            try:
+                resultado = guardarEmpresa(nombre_empresa, direccion_empresa, telefono_empresa, email_empresa)
+                if resultado:
+                    flash('Empresa creada exitosamente', 'success')
+                else:
+                    flash('Error al crear la empresa', 'error')
+            except Exception as e:
+                flash(f'Error en base de datos: {str(e)}', 'error')
+
+            return redirect(url_for('empresa'))
+    else:
+        flash('Debes iniciar sesión primero', 'error')
         return redirect(url_for('inicio'))
