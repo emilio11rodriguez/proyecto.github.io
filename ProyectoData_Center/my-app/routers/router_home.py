@@ -6,11 +6,19 @@ from mysql.connector.errors import Error
 
 # Importando cenexión a BD
 from controllers.funciones_home import *
+@app.route('/empresa', methods=['GET'])
+def empresa():
+    if 'conectado' in session:
+        return render_template('public/usuarios/empresa.html', empresa=lista_empresasBD(), dataLogin=dataLoginSesion())
+    else:
+        flash('Debes iniciar sesión primero', 'error')
+        return redirect(url_for('inicio'))
+
 
 @app.route('/lista-de-areas', methods=['GET'])
 def lista_areas():
     if 'conectado' in session:
-        return render_template('public/usuarios/lista_areas.html', areas=lista_areasBD(), dataLogin=dataLoginSesion())
+        return render_template('public/usuarios/lista_areas.html',  areas=lista_areasBD(), dataLogin=dataLoginSesion())
     else:
         flash('primero debes iniciar sesión.', 'error')
         return redirect(url_for('inicio'))

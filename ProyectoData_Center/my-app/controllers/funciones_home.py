@@ -148,6 +148,31 @@ def lista_areasBD():
         print(f"Error en lista_areas : {e}")
         return []
 
+
+def lista_empresasBD():
+    try:
+        with connectionBD() as conexion_MySQLdb:
+            with conexion_MySQLdb.cursor(dictionary=True) as cursor:
+                querySQL = """
+                    SELECT 
+                        id_empresa,
+                        nombre_empresa,
+                        direccion_empresa,
+                        telefono_empresa,
+                        email_empresa 
+                    FROM empresa
+                """
+                cursor.execute(querySQL)
+                empresasBD = cursor.fetchall()
+                print(f"Empresas encontradas: {empresasBD}")  # Imprimir las empresas
+                if not empresasBD:
+                    print("No se encontraron empresas")
+        return empresasBD
+    except Exception as e:
+        print(f"Error en lista_empresasBD: {e}")
+        return []
+
+
 # Eliminar usuario
 def eliminarUsuario(id):
     try:
